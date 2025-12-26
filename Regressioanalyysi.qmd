@@ -1,0 +1,173 @@
+---
+title: "Regressioanalyysi keskituntipalkasta"
+format: html
+toc: true
+code-fold: true
+warning: false
+message: false
+---
+
+
+## Tiivistelmä
+
+Tässä työssä analysoidaan vuonna 1976 tehtyä aineistoa (wage1) ja tarkastellaan, miten koulutuksen pituus ja työkokemus liittyvät keskituntipalkkaan.
+
+Analyysi etenee yksinkertaisista regressiomalleista monimuuttujaiseen malliin, jossa koulutuksen ja työkokemuksen vaikutuksia arvioidaan samanaikaisesti. Lisäksi tuloksia havainnollistetaan graafisesti ja mallien selitysvoimaa vertaillaan.
+
+Työn tarkoituksena on osoittaa perusvalmiudet tilastolliseen mallintamiseen R:llä, tulosten tulkintaan sekä analyysin selkeään raportointiin.
+
+
+## Aineisto ja tutkimuskysymys
+
+Analyysissä käytetään `wage1`-aineistoa, joka sisältää tietoja 526 henkilöstä vuodelta 1976. Aineistossa on muun muassa tietoja keskituntipalkasta, asuinpaikasta, koulutuksen määrästä jne.
+
+Tutkimuskysymys on: Voidaanko (ja jos voidaan niin miten hyvin) keskituntipalkkaa selittää koulutuksella ja työkokemuksella, erikseen ja yhdessä?
+
+
+## Regressiomallin sovittaminen
+
+Estimoidaan lineaariset regressiomallit tutkimuskysymyksien tarkasteluun. Havainnollistetaan tilanteita sekä visuaalisesti että tilastollisesti
+
+```{r}
+#| label: setup
+#| include: false
+
+library(wooldridge)
+library(car)
+data(wage1)
+```
+
+
+### Koulutus ja tuntipalkka
+
+```{r}
+#| label: plot-educ
+#| fig-cap: "Hajontakuvio keskituntipalkasta suhteessa koulutuksen pituuteen"
+
+fit1 <- lm(wage ~ educ, data = wage1)
+plot(wage1$educ, wage1$wage, 
+     main = "Koulutuksen pituus ja keskituntipalkka vuonna 1976",
+     xlab = "Koulutuksen pituus vuosissa",
+     ylab = "Keskituntipalkka")
+abline(fit1)
+```
+
+Hajontakuvio paljastaa, että lineaarinen malli näyttää positiivisen yhteyden koulutuksen pituuden ja tuntipalkan välillä. Sovitettu regressiosuora nousee ylöspäin, mikä viittaa siihen, että pidemmällä koulutuksella on keskimäärin positiivinen yhteys palkkaan, mikä tuntuukin hyvin intuitiiviselta.
+
+Kuitenkin havaitaan, että residuaalit ovat isoja ja pitempi koulutus näyttää kasvattavan poikkeamia. Toisin sanoen vaihtelu on paljon suurempaa, kun koulutuksen pituus kasvaa. Tämä tarkoittaa, että koulutus selittää tuntipalkkaa positiivisesti, mutta sen myötä varianssi havaintojen välillä kasvaa.
+
+Tarkastellaan tätä tilastollisesti:
+
+```{r}
+#| label: model1
+#| include: false
+
+fit1 <- lm(wage ~ educ, data = wage1)
+summary1 <- summary(fit1)
+```
+
+```{r}
+#| label: results1
+#| echo: false
+
+summary1
+```
+
+Tulokset osoittavat tilastollisesti merkitsevän positiivisen yhteyden. Testisuure on noin 103, mikä on valtavan suuri ja hylkää vahvasti nollahypoteesin siitä, että yhteyttä ei ole. R²-kerroin kertoo, mikä osuus palkkojen vaihtelusta selittyy koulutuksella.
+
+Siitä huolimatta on huomioitava, että suuret residuaalit viittaavat siihen, että kokonaistuntiansioon vaikuttaa selkeästi muitakin tekijöitä kuin koulutus.
+
+
+### Potentiaalinen työkokemus ja tuntipalkka
+
+Selvennetään aluksi, mitä tarkoittaa *potentiaalinen* työkokemus. Se tarkoittaa sitä aikaa, jonka henkilön on ollut mahdollista olla työssä. Se ei siis suoraan kerro meille sitä aikaa, jonka henkilö on ollut oikeasti töissä.
+
+```{r}
+#| label: plot-exper
+#| fig-cap: "Hajontakuvio keskituntipalkasta suhteessa potentiaaliseen työkokemukseen"
+
+fit2 <- lm(wage ~ exper, data = wage1)
+plot(wage1$exper, wage1$wage, 
+     main = "Työkokemus ja keskituntipalkka vuonna 1976",
+     xlab = "Potentiaalisen työkokemuksen pituus vuosissa",
+     ylab = "Keskituntipalkka")
+abline(fit2)
+```
+
+(Potentiaalisen) työkokemuksen ja palkkojen välinen yhteys näyttää myös positiiviselta, mutta kuvio eroaa koulutuksesta. Hajontakuvio osoittaa, että palkat yleensä kasvavat kokemuksen myötä, mutta yhteys vaikuttaa selvästi heikommalta kuin koulutuksessa. Vaihtelu puolestaan on tässä tapauksessa jo valtavaa. Huomataan myös, että vaihtelu on suurinta noin 20–30 vuoden kohdalla ja suurin osa havainnoista on selkeästi alkupäässä.
+
+Tarkastellaan tätä tilastollisesti:
+
+```{r}
+#| label: model2
+#| include: false
+
+fit2 <- lm(wage ~ exper, data = wage1)
+summary2 <- summary(fit2)
+```
+
+```{r}
+#| label: results2
+#| echo: false
+
+summary2
+```
+
+Testisuure on noin 6,8, mikä on reilusti pienempi kuin koulutuksessa (103). Testisuure on niin iso, että nolahypoteesi hylättäisiin kaikilla normaalilla merkitsevyystasolla. Mitä tämä kertoo? Se kertoo, että on jokin tilastollisesti merkittävä yhteys eli lineaarinen malli periaatteessa voidaan sovittaa. Siitä huolimatta varianssi on todella merkittävä ja hajontaa on kaikkialla niin paljon, että keskituntipalkan selittäminen pelkällä työkokemuksella ei ole mielekästä
+
+### Koulutus ja työkokemus yhdessä
+
+```{r}
+#| label: avplots
+#| fig-cap: "Keskituntipalkan selittäjänä koulutus ja työkokemus"
+fit3 <- lm(wage ~ educ + exper, data = wage1)
+avPlots(fit3, main = "Keskituntipalkan selittäjänä koulutus ja työkokemus", 
+        id = FALSE)
+
+```
+
+
+Osittaisregressiokuvat havainnollistavat palkkojen ja kunkin selittävän muuttujan välisiä osittaisia yhteyksiä. Vasen puoli näyttää palkkojen ja koulutuksen välisen yhteyden kokemuksen vaikutuksen poistamisen jälkeen, kun taas oikea puoli näyttää palkkojen ja kokemuksen välisen yhteyden koulutuksen vaikutuksen poistamisen jälkeen.
+
+Molemmissa paneeleissa positiiviset kulmakertoimet vahvistavat, että sekä koulutuksella että kokemuksella on riippumattomat positiiviset yhteydet palkkoihin, vaikka niiden välinen korrelaatio otetaankin huomioon. Hajonta sovitettujen suorien ympärillä näissä kuvissa edustaa residuaalista vaihtelua, jota malli ei selitä.
+
+```{r}
+#| label: model3
+#| include: false
+
+fit3 <- lm(wage ~ educ + exper, data = wage1)
+summary3 <- summary(fit3)
+```
+
+```{r}
+#| label: results3
+#| echo: false
+
+summary3
+```
+
+Kolmannessa mallissa otetaan huomioon sekä koulutus että työkokemus selittävinä muuttujina. Tämä on tarpeen, koska koulutus ja kokemus saattavat olla korreloituneita ja niiden yksittäiset vaikutukset saattavat sekoittua, kun niitä tarkastellaan erikseen.
+
+
+## Selitettävyys
+
+```{r}
+#| label: r-squared-comparison
+#| echo: false
+
+cat("Malli 1 (vain koulutus) R²:", round(summary1$r.squared, 4), "\n")
+cat("Malli 2 (vain kokemus) R²:", round(summary2$r.squared, 4), "\n")
+cat("Malli 3 (koulutus + kokemus) R²:", round(summary3$r.squared, 4), "\n")
+```
+
+Kun tutkitaan selitettävyysastetta niin huomataan, että se on korkeimillaan silloin kun selittäjinä ovat sekä kokemus että koulutus. Huomataan myös, että aineiston pohjalta koulutus selittää ylipäätänsä keskituntipalkkaa paremmin kuin kokemus, koska sen selitysaste on korkeampi. Tämä tuntuu äsken tehdyn analyysin jälkeen luonnolliselta. 
+
+
+## Yhteenveto
+
+
+Analyysistä saadaan useita eri ulottuvuuksia. Ensinnäkin, sekä koulutus että kokemus liittyvät yksilöllisesti korkeampiin keskituntipalkkoihin, kuten yksinkertaisissa regressiomalleissa tilastollisesti merkitsevät positiiviset kertoimet osoittavat. Toiseksi, kun muuttujia tarkastellaan yhdessä monimuuttujamallissa, molemmat pysyvät merkitsevinä palkkojen selittäjinä, mikä viittaa siihen, että ne täydentävät toisiaan palkkojen selittämisessä. 
+
+Näistä havainnoista huolimatta on tärkeää huomata, että huomattava osa palkkojen vaihtelusta jää selittämättä näillä kahdella muuttujalla. R²-arvot, vaikka osoittavatkin merkityksellisiä yhteyksiä, jättävät huomattavan osan palkkojen vaihtelusta selittämättä. Tämä viittaa siihen, että muut tekijät—kuten kyvykkyys, toimiala, ammatti, sijainti tai havaitsemattomat ominaisuudet—vaikuttavat merkittävästi palkkojen määräytymiseen.
+
+Loppujen lopuksi näyttää siis siltä, että mitä enemmän lisäämme selittäjiä, sitä suurempi selitysaste lopulta on. Tätä emme voi kuitenkaan varmaksi sanoa tämän aineiston pohjalta. 

@@ -1,0 +1,14 @@
+# R
+.Rhistory
+.RData
+.Ruserdata
+*.Rproj
+
+# Quarto
+_quarto/
+*.html
+*.pdf
+
+# OS
+.DS_Store
+
