@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -37,15 +37,31 @@ jobs:
       - name: Render Quarto document
         run: quarto render Regressioanalyysi.qmd --to html
 
+      - name: Verify render output
+        run: |
+          echo "Checking for rendered files..."
+          ls -la *.html || echo "No HTML files found in root"
+          ls -la Regressioanalyysi* || echo "No Regressioanalyysi files found"
+
       - name: Prepare docs directory
         run: |
           mkdir -p docs
+          # Copy the rendered HTML file
           if [ -f Regressioanalyysi.html ]; then
             cp Regressioanalyysi.html docs/index.html
+            echo "Copied Regressioanalyysi.html to docs/index.html"
+          else
+            echo "ERROR: Regressioanalyysi.html not found!"
+            exit 1
           fi
+          # Copy any supporting files (images, CSS, etc.)
           if [ -d Regressioanalyysi_files ]; then
             cp -r Regressioanalyysi_files docs/
+            echo "Copied Regressioanalyysi_files directory"
           fi
+          # List contents for debugging
+          echo "Contents of docs directory:"
+          ls -la docs/
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
