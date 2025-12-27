@@ -172,3 +172,4 @@ The analysis yields several different dimensions. First, both education and expe
 Despite these observations, it is important to note that a substantial portion of the variation in wages remains unexplained by these two variables. The R² values, although they show meaningful relationships, leave a substantial portion of the variation in wages unexplained. This suggests that other factors—such as ability, industry, occupation, location, or unobserved characteristics—significantly affect wage determination.
 
 In the end, it thus appears that the more predictors we add, the greater the explanatory power ultimately is. However, we cannot say this for certain based on this dataset. 
+
