@@ -74,7 +74,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-ff63373b1067ca6f91cf1456aa1f00a2.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-5b4ad623e5705c0698d39aec6f10cf02.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -170,7 +170,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="koulutus-ja-tuntipalkka" class="level3">
 <h3 class="anchored" data-anchor-id="koulutus-ja-tuntipalkka">Koulutus ja tuntipalkka</h3>
 <div class="cell">
-<details class="code-fold">
+<details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>fit1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(wage <span class="sc">~</span> educ, <span class="at">data =</span> wage1)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(wage1<span class="sc">$</span>educ, wage1<span class="sc">$</span>wage, </span>
@@ -220,7 +220,7 @@ F-statistic: 103.4 on 1 and 524 DF,  p-value: &lt; 2.2e-16</code></pre>
 <h3 class="anchored" data-anchor-id="potentiaalinen-työkokemus-ja-tuntipalkka">Potentiaalinen työkokemus ja tuntipalkka</h3>
 <p>Selvennetään aluksi, mitä tarkoittaa <em>potentiaalinen</em> työkokemus. Se tarkoittaa sitä aikaa, jonka henkilön on ollut mahdollista olla työssä. Se ei siis suoraan kerro meille sitä aikaa, jonka henkilö on ollut oikeasti töissä.</p>
 <div class="cell">
-<details class="code-fold">
+<details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>fit2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(wage <span class="sc">~</span> exper, <span class="at">data =</span> wage1)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(wage1<span class="sc">$</span>exper, wage1<span class="sc">$</span>wage, </span>
@@ -267,7 +267,7 @@ F-statistic: 6.766 on 1 and 524 DF,  p-value: 0.009555</code></pre>
 <section id="koulutus-ja-työkokemus-yhdessä" class="level3">
 <h3 class="anchored" data-anchor-id="koulutus-ja-työkokemus-yhdessä">Koulutus ja työkokemus yhdessä</h3>
 <div class="cell">
-<details class="code-fold">
+<details open="" class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>fit3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(wage <span class="sc">~</span> educ <span class="sc">+</span> exper, <span class="at">data =</span> wage1)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">avPlots</span>(fit3, <span class="at">main =</span> <span class="st">"Keskituntipalkan selittäjänä koulutus ja työkokemus"</span>, </span>

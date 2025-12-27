@@ -2,7 +2,8 @@
 title: "Regressioanalyysi keskituntipalkasta"
 format: html
 toc: true
-code-fold: true
+code-fold: show
+theme: cosmo
 warning: false
 message: false
 ---
