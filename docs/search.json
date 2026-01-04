@@ -7,8 +7,8 @@
     "text": "This work analyzes data from 1976 (wage1) and examines how the length of education and work experience relate to average hourly wage.\nThe analysis progresses from simple regression models to a multivariate model, where the effects of education and work experience are assessed simultaneously. In addition, results are illustrated graphically and the explanatory power of the models is compared.\nThe purpose of this work is to demonstrate basic skills in statistical modeling with R, interpretation of results, and clear reporting of the analysis."
   },
   {
-    "objectID": "regression-analysis.html#summary",
-    "href": "regression-analysis.html#summary",
+    "objectID": "regression-analysis.html#introduction",
+    "href": "regression-analysis.html#introduction",
     "title": "Regression Analysis of Average Hourly Wage",
     "section": "",
     "text": "This work analyzes data from 1976 (wage1) and examines how the length of education and work experience relate to average hourly wage.\nThe analysis progresses from simple regression models to a multivariate model, where the effects of education and work experience are assessed simultaneously. In addition, results are illustrated graphically and the explanatory power of the models is compared.\nThe purpose of this work is to demonstrate basic skills in statistical modeling with R, interpretation of results, and clear reporting of the analysis."
@@ -35,8 +35,8 @@
     "text": "Explanatory Power\n\n\nModel 1 (education only) R²: 0.1648 \n\n\nModel 2 (experience only) R²: 0.0127 \n\n\nModel 3 (education + experience) R²: 0.2252 \n\n\nWhen examining the degree of explanatory power, it is noted that it is highest when both experience and education are predictors. It is also noted that based on the data, education explains average hourly wage better overall than experience, because its explanatory power is higher. This seems natural after the analysis just performed."
   },
   {
-    "objectID": "regression-analysis.html#summary-1",
-    "href": "regression-analysis.html#summary-1",
+    "objectID": "regression-analysis.html#summary",
+    "href": "regression-analysis.html#summary",
     "title": "Regression Analysis of Average Hourly Wage",
     "section": "Summary",
     "text": "Summary\nThe analysis yields several different dimensions. First, both education and experience are individually associated with higher average hourly wages, as the statistically significant positive coefficients in the simple regression models show. Second, when the variables are examined together in a multivariate model, both remain significant predictors of wages, which suggests that they complement each other in explaining wages.\nDespite these observations, it is important to note that a substantial portion of the variation in wages remains unexplained by these two variables. The R² values, although they show meaningful relationships, leave a substantial portion of the variation in wages unexplained. This suggests that other factors—such as ability, industry, occupation, location, or unobserved characteristics—significantly affect wage determination.\nIn the end, it thus appears that the more predictors we add, the greater the explanatory power ultimately is. However, we cannot say this for certain based on this dataset."

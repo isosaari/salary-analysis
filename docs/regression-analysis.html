@@ -6,6 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Arttu Isosaari">
 
 <title>Regression Analysis of Average Hourly Wage</title>
 <style>
@@ -118,7 +119,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#summary" id="toc-summary" class="nav-link active" data-scroll-target="#summary">Summary</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
   <li><a href="#data-and-research-question" id="toc-data-and-research-question" class="nav-link" data-scroll-target="#data-and-research-question">Data and Research Question</a></li>
   <li><a href="#fitting-the-regression-model" id="toc-fitting-the-regression-model" class="nav-link" data-scroll-target="#fitting-the-regression-model">Fitting the Regression Model</a>
   <ul class="collapse">
@@ -127,7 +128,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#education-and-work-experience-together" id="toc-education-and-work-experience-together" class="nav-link" data-scroll-target="#education-and-work-experience-together">Education and Work Experience Together</a></li>
   </ul></li>
   <li><a href="#explanatory-power" id="toc-explanatory-power" class="nav-link" data-scroll-target="#explanatory-power">Explanatory Power</a></li>
-  <li><a href="#summary-1" id="toc-summary-1" class="nav-link" data-scroll-target="#summary-1">Summary</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
   </ul>
 </nav>
     </div>
@@ -143,6 +144,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Arttu Isosaari </p>
+          </div>
+  </div>
     
   
     
@@ -153,8 +160,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="summary" class="level2">
-<h2 class="anchored" data-anchor-id="summary">Summary</h2>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
 <p>This work analyzes data from 1976 (wage1) and examines how the length of education and work experience relate to average hourly wage.</p>
 <p>The analysis progresses from simple regression models to a multivariate model, where the effects of education and work experience are assessed simultaneously. In addition, results are illustrated graphically and the explanatory power of the models is compared.</p>
 <p>The purpose of this work is to demonstrate basic skills in statistical modeling with R, interpretation of results, and clear reporting of the analysis.</p>
@@ -325,8 +332,8 @@ F-statistic: 75.99 on 2 and 523 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 <p>When examining the degree of explanatory power, it is noted that it is highest when both experience and education are predictors. It is also noted that based on the data, education explains average hourly wage better overall than experience, because its explanatory power is higher. This seems natural after the analysis just performed.</p>
 </section>
-<section id="summary-1" class="level2">
-<h2 class="anchored" data-anchor-id="summary-1">Summary</h2>
+<section id="summary" class="level2">
+<h2 class="anchored" data-anchor-id="summary">Summary</h2>
 <p>The analysis yields several different dimensions. First, both education and experience are individually associated with higher average hourly wages, as the statistically significant positive coefficients in the simple regression models show. Second, when the variables are examined together in a multivariate model, both remain significant predictors of wages, which suggests that they complement each other in explaining wages.</p>
 <p>Despite these observations, it is important to note that a substantial portion of the variation in wages remains unexplained by these two variables. The R² values, although they show meaningful relationships, leave a substantial portion of the variation in wages unexplained. This suggests that other factors—such as ability, industry, occupation, location, or unobserved characteristics—significantly affect wage determination.</p>
 <p>In the end, it thus appears that the more predictors we add, the greater the explanatory power ultimately is. However, we cannot say this for certain based on this dataset.</p>
