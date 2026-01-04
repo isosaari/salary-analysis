@@ -10,7 +10,7 @@ author: Arttu Isosaari
 ---
 
 
-## Summary
+## Introduction
 
 This work analyzes data from 1976 (wage1) and examines how the length of education and work experience relate to average hourly wage.
 
